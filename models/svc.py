@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from config.config import Config
 from sklearn import svm
+from modules.utils import get_filename
 
 class SVC:
     X = None
@@ -39,4 +40,4 @@ class SVC:
             y_ids = pd.DataFrame(self.test_ids, columns=['ID'])
             y_preds_df = pd.DataFrame(y_preds, columns=['Label'])
             predictions = y_ids.join(y_preds_df)
-            predictions.to_csv(f'{output_directory}/{titles[i]}.csv', index=False)
+            predictions.to_csv(f'{output_directory}/{get_filename(titles[i])}.csv', index=False)

@@ -1,5 +1,5 @@
 from modules.preprocessing import clean_text
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,6 +7,7 @@ from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score
 from models.svc import SVC
 from models.linear_svm import LinearSVM
+from modules.vectorizer import Vectorizer
 
 #Reading from dataset
 train_path = 'input/Train.csv'
@@ -30,31 +31,8 @@ plt.ylabel('No of occurences')
 plt.xlabel('Category')
 #plt.show()
 
-vectorizer = CountVectorizer(
-    stop_words = 'english',
-    preprocessor=clean_text
-)
+vectorizer = Vectorizer(train_texts, test_texts)
 
-train_features = vectorizer.fit_transform(train_texts)
-test_features = vectorizer.transform(test_texts)
-
-#svc = SVC(train_features, train_data['Label'], test_data['ID'])
-#svc.predict_and_save_csv(test_features)
+train_features, test_features = vectorizer.get_vectorized_features(type='tfidf')
 linear_svm = LinearSVM(train_features, train_data['Label'], test_data['ID'])
 linear_svm.predict_and_save_csv(test_features)
-'''
-linear_model = LinearSVC(kernel='linear', decision_function_shape='ovo', C=1)
-linear_model.fit(train_features, train_data['Label'])
-rbf_model = LinearSVC(kernel='rbf', decision_function_shape='ovo', C=1, gamma=1)
-rbf_model.fit(train_features, train_data['Label'])
-sigmoid_model = LinearSVC(kernel='sigmoid', decision_function_shape='ovo', C=1, gamma=1)
-sigmoid_model.fit(train_features, train_data['Label'])
-poly_model = LinearSVC(kernel='poly', decision_function_shape='ovo', C=1, gamma=1)
-poly_model.fit(train_features, train_data['Label'])
-y_preds = model.predict(test_features)
-y_ids = test_data['ID']
-y_ids = pd.DataFrame(y_ids, columns=['ID'])
-y_preds_df = pd.DataFrame(y_preds, columns=['Label'])
-predictions = y_ids.join(y_preds_df)
-predictions.to_csv('output/linear_svm.csv', index=False)
-'''
