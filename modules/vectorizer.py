@@ -1,4 +1,4 @@
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, TfidfTransformer
 from modules.preprocessing import clean_text
 from stopwordsiso import stopwords as stopwords
 
@@ -20,8 +20,9 @@ class Vectorizer:
 
         return train_features, test_features
 
+
     def tfidf_vectorizer(self):
-        vectorizer = TfidfVectorizer(preprocessor = clean_text)
+        vectorizer = TfidfVectorizer(preprocessor = clean_text, stop_words=stopwords("ny"), ngram_range=(1,2))
         train_features = vectorizer.fit_transform(self.train)
         test_features = vectorizer.transform(self.test)
         return train_features, test_features
@@ -36,4 +37,22 @@ class Vectorizer:
         else:
             print('Getting count vectorized features...\n')
             return self.count_vectorizer()
+
+
+def get_extractors(type = 'count'):
+    if type == 'count':
+        transformer = CountVectorizer(
+            preprocessor = clean_text,
+            stop_words = stopwords('ny')
+        )
+    elif type == 'tfidf':
+        transformer = TfidfVectorizer(preprocessor = clean_text, stop_words = stopwords("ny"), ngram_range=(1,2))
+    elif type == 'tfidf-transformer':
+        transformer = TfidfTransformer()
+    else:
+        transformer = CountVectorizer(
+            preprocessor = clean_text,
+            stop_words = stopwords('ny')
+        )
+    return transformer 
         

@@ -25,7 +25,6 @@ class LinearSVM:
         print('Saving predictions to csv...\n')
         title = get_filename('linear_svm')
         output_directory = Config().get_config()['output_directory']
-        print(output_directory)
         y_preds = self.model.predict(test_features)
         y_ids = pd.DataFrame(self.test_ids, columns=['ID'])
         y_preds_df = pd.DataFrame(y_preds, columns=['Label'])

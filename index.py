@@ -7,6 +7,7 @@ from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score
 from models.svc import SVC
 from models.linear_svm import LinearSVM
+from models.naive_bayesian import NaiveBayesian
 from modules.vectorizer import Vectorizer
 
 #Reading from dataset
@@ -30,9 +31,14 @@ plt.title('Number of comments per category')
 plt.ylabel('No of occurences')
 plt.xlabel('Category')
 #plt.show()
+print()
 
+'''
 vectorizer = Vectorizer(train_texts, test_texts)
-
-train_features, test_features = vectorizer.get_vectorized_features(type='tfidf')
+train_features, test_features = vectorizer.get_vectorized_features(type='count')
 linear_svm = LinearSVM(train_features, train_data['Label'], test_data['ID'])
 linear_svm.predict_and_save_csv(test_features)
+'''
+
+naive_bayesian = NaiveBayesian(train_texts, train_data['Label'], test_data['ID'])
+naive_bayesian.predict_and_save_csv(test_texts, 'Multinomial')
