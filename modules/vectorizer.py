@@ -1,6 +1,7 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, TfidfTransformer
 from modules.preprocessing import clean_text
 from stopwordsiso import stopwords as stopwords
+from nltk.tokenize import sent_tokenize
 
 class Vectorizer:
     train = None
@@ -57,3 +58,6 @@ def get_extractors(extractor_type = 'count'):
         )
     return transformer 
         
+
+def sentence_tokenizer(text):
+    return sent_tokenize(text)
