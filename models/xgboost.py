@@ -1,32 +1,29 @@
-import pandas as pd
-import numpy as np
-from config.config import Config
-from sklearn.svm import LinearSVC
-from modules.utils import get_filename
+from xgboost import XGBClassifier
 from modules.model_utils import get_pipeline, get_gdsearch
-from modules.vectorizer import Vectorizer
+from modules.utils import get_filename
+from config.config import Config
+import pandas as pd
 
-class LinearSVM:
+class XGBoost:
     X = None
     y = None
     test_ids = None
-    model = None
 
     def __init__(self, X, y, test_ids):
         self.X = X
         self.y = y
         self.test_ids = test_ids
 
-    def train_models(self):
-        pipeline = get_pipeline(LinearSVC(C=1, multi_class='ovr',class_weight='balanced', max_iter = 1000000, dual = True), 'tfidf')
+    def train_model(self):
+        pipeline = get_pipeline(XGBClassifier(random_state = 42, seed = 2, colsample_bytree = 0.6, subsample = 0.7), 'tfidf')
         self.model = get_gdsearch(pipeline).fit(self.X, self.y)
-        print('Best estimator params: ', self.model.best_params_)
-        
+        print('Model best params:', self.model.best_params_)
+
     def predict_and_save_csv(self, test_features):
-        print('Training Linear SVM Model...\n')
-        self.train_models()
+        print('Training XGBoost Classifier...\n')
+        self.train_model()
         print('Saving predictions to csv...\n')
-        title = get_filename('linear_svm')
+        title = get_filename('xgboost')
         output_directory = Config().get_config()['output_directory']
         y_preds = self.model.predict(test_features)
         y_ids = pd.DataFrame(self.test_ids, columns=['ID'])

@@ -22,7 +22,7 @@ class Vectorizer:
 
 
     def tfidf_vectorizer(self):
-        vectorizer = TfidfVectorizer(preprocessor = clean_text, stop_words=stopwords("ny"), ngram_range=(1,2))
+        vectorizer = TfidfVectorizer(preprocessor = clean_text, stop_words=stopwords("ny"), ngram_range=(1,2), sublinear_tf=True, min_df=0.05, norm='12')
         train_features = vectorizer.fit_transform(self.train)
         test_features = vectorizer.transform(self.test)
         return train_features, test_features

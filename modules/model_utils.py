@@ -6,9 +6,12 @@ def get_gdsearch(text_clf, model_type = 'Gaussian'):
     parameters = {
         'vect__ngram_range': [(1,1), (1,2), (1,4)],
         'tfidf__use_idf': (True, False),
+        'clf__n_estimators': [50,100, 300],
+        'clf__colsample_bytree': [0.6, 0.8, 1],
+        'clf__subsample': [0.5, 0.6, 0.7, 0.8, 0.9, 1]
     }
 
-    if model_type != 'Gaussian':
+    if model_type != 'Multinom':
         parameters['clf__alpha'] = (1e-1, 1e-2, 1e-3)
 
     gs_clf = GridSearchCV(text_clf, parameters, cv = 5, n_jobs = -1)

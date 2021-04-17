@@ -9,7 +9,12 @@ from models.svc import SVC
 from models.linear_svm import LinearSVM
 from models.naive_bayesian import NaiveBayesian
 from models.logistic import Logistic
+from models.xgboost import XGBoost
 from modules.vectorizer import Vectorizer
+from modules.utils import stemmer
+import warnings
+
+warnings.filterwarnings('ignore')
 #Reading from dataset
 train_path = 'input/Train.csv'
 test_path = 'input/Test.csv'
@@ -18,12 +23,12 @@ train_data = pd.read_csv(train_path)
 test_data = pd.read_csv(test_path)
 train_texts = train_data['Text']
 test_texts = test_data['Text']
-
 all_labels = train_data['Label'].unique()
 label_count = []
 for label in all_labels:
     mask = train_data['Label'] == label
     label_count.append((label,len(train_data[mask])))
+
 
 data_stats = pd.DataFrame(label_count, columns=['category','no of labels'])
 data_stats.plot(x='category',y='no of labels', kind='bar', legend=False, grid=True, figsize=(8, 8))
@@ -33,5 +38,7 @@ plt.xlabel('Category')
 #plt.show()
 print()
 
-logistic_model = Logistic(train_texts, train_data['Label'], test_data['ID'])
-logistic_model.predict_and_save_csv(test_texts)
+#linear_model = LinearSVM(train_texts, train_data['Label'], test_data['ID'])
+#linear_model.predict_and_save_csv(test_texts)
+xgboost_model = XGBoost(train_texts, train_data['Label'], test_data['ID'])
+xgboost_model.predict_and_save_csv(test_texts)
