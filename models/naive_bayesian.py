@@ -27,14 +27,14 @@ class NaiveBayesian:
             self.model = get_gdsearch(get_pipeline(MultinomialNB()), type).fit(self.X, self.y)
 
 
-    def predict_and_save_csv(self, test_features, type = 'Gaussian'):
+    def predict_and_save_csv(self, test_features, model_type = 'Gaussian'):
         print('Training NaiveBayesian model...\n')
-        self.train_model(type)
+        self.train_model(model_type)
         print('Saving predictions to csv...\n')
         title = get_filename('naive_bayesian_multinom')
         output_directory = Config().get_config()['output_directory']
         y_preds = None
-        if type == 'Gaussian':
+        if model_type == 'Gaussian':
             y_preds = self.model.predict(self.test_features.toarray())
         else:
             y_preds = self.model.predict(test_features)

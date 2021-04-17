@@ -39,15 +39,16 @@ class Vectorizer:
             return self.count_vectorizer()
 
 
-def get_extractors(type = 'count'):
-    if type == 'count':
+def get_extractors(extractor_type = 'count'):
+    if extractor_type == 'count':
         transformer = CountVectorizer(
             preprocessor = clean_text,
-            stop_words = stopwords('ny')
+            stop_words = stopwords('ny'),
+            lowercase = True
         )
-    elif type == 'tfidf':
+    elif extractor_type == 'tfidf':
         transformer = TfidfVectorizer(preprocessor = clean_text, stop_words = stopwords("ny"), ngram_range=(1,2))
-    elif type == 'tfidf-transformer':
+    elif extractor_type == 'tfidf-transformer':
         transformer = TfidfTransformer()
     else:
         transformer = CountVectorizer(

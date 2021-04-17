@@ -8,8 +8,8 @@ from sklearn.metrics import accuracy_score
 from models.svc import SVC
 from models.linear_svm import LinearSVM
 from models.naive_bayesian import NaiveBayesian
+from models.logistic import Logistic
 from modules.vectorizer import Vectorizer
-
 #Reading from dataset
 train_path = 'input/Train.csv'
 test_path = 'input/Test.csv'
@@ -33,12 +33,5 @@ plt.xlabel('Category')
 #plt.show()
 print()
 
-'''
-vectorizer = Vectorizer(train_texts, test_texts)
-train_features, test_features = vectorizer.get_vectorized_features(type='count')
-linear_svm = LinearSVM(train_features, train_data['Label'], test_data['ID'])
-linear_svm.predict_and_save_csv(test_features)
-'''
-
-naive_bayesian = NaiveBayesian(train_texts, train_data['Label'], test_data['ID'])
-naive_bayesian.predict_and_save_csv(test_texts, 'Multinomial')
+logistic_model = Logistic(train_texts, train_data['Label'], test_data['ID'])
+logistic_model.predict_and_save_csv(test_texts)
