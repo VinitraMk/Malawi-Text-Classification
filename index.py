@@ -39,5 +39,5 @@ plt.xlabel('Category')
 #plt.show()
 print()
 '''
-linear_model = LinearSVM(train_texts, train_data['Label_Id'], test_data['ID'], le)
-linear_model.predict_and_save_csv(test_texts)
+svc = SVC(train_texts, train_data['Label_Id'], test_data['ID'], le)
+svc.predict_and_save_csv(test_texts)
