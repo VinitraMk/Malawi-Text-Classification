@@ -13,7 +13,7 @@ def get_gdsearch(text_clf, model_type = 'Gaussian'):
         parameters['clf__alpha'] = (1e-1, 1e-2, 1e-3)
 
     if model_type == 'XGBoost':
-        parameters['clf__n_estimators'] = [40, 45, 50]
+        parameters['clf__n_estimators'] = [60, 65, 70]
         #parameters['clf__max_depth'] = [35]
         parameters['clf__subsample'] = [0.8]
     

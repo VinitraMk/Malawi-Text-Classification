@@ -2,8 +2,8 @@ import os
 
 class Config:
     root = os.getcwd()
-    output_directory = f'{root}\output'
-    input_directory = f'{root}\input'
+    output_directory = os.path.join(root, 'output')
+    input_directory = os.path.join(root, 'input')
 
     def __init__(self):
         pass
