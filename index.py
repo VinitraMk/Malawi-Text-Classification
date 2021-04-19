@@ -17,7 +17,6 @@ from stopwordsiso import stopwords as stopwords
 import time
 
 st = time.time()
-
 warnings.filterwarnings('ignore')
 #Reading from dataset
 train_path = 'input/Train.csv'
@@ -65,7 +64,7 @@ for label_id, label in sorted(encoded_labels.items()):
     print("\t. Most correlated bigrams:\n\t\t. {}".format('\n\t\t. '.join(bigrams[-K:])))
 '''
 
-K = 30000
+K = 35000
 kbest = SelectKBest(chi2, k = K)
 train_features_best = kbest.fit_transform(train_features, train_data['Label_Id'])
 test_features_best = kbest.transform(test_features)
