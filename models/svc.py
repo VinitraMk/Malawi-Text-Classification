@@ -58,8 +58,6 @@ class SVC:
         titles = ['linear_svc', 'rbf_svc', 'sigmoid_svc', 'poly_svc']
         output_directory = Config().get_config()['output_directory']
         for title in titles:
-            if title !== 'poly_svc':
-                pass
             clf = self.train_models(title)
             print(f'Saving predictions of {title} model to csv...\n')
             y_preds = clf.predict(test_features)

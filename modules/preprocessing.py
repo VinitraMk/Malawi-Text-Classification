@@ -19,15 +19,17 @@ class LabelEncoding:
 
     le = None
     all_labels = None
+    encoded_labels = None
 
     def __init__(self, all_labels):
         self.le = LabelEncoder()
-        self.le.fit(all_labels)
+        self.encoded_labels = self.le.fit_transform(all_labels)
+        self.encoded_labels = dict(zip(self.encoded_labels, all_labels))
 
     def encode(self, train):
         trfs = self.le.transform(train['Label'])
         train['Label_Id'] = trfs
-        return train
+        return train, self.encoded_labels
 
     def decode(self, test):
         trfs = self.le.inverse_transform(test['Label_Id'])
