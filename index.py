@@ -34,7 +34,6 @@ for label in all_labels:
 
 le = LabelEncoding(all_labels)
 train_data, encoded_labels = le.encode(train_data)
-'''
 data_stats = pd.DataFrame(label_count, columns=['category','no of labels'])
 data_stats.plot(x='category',y='no of labels', kind='bar', legend=False, grid=True, figsize=(8, 8))
 plt.title('Number of comments per category')
@@ -42,7 +41,7 @@ plt.ylabel('No of occurences')
 plt.xlabel('Category')
 #plt.show()
 print()
-'''
+
 #xgb = XGBoost(train_texts, train_data['Label_Id'], test_data['ID'], le)
 #xgb.predict_and_save_csv(test_texts)
 vectorizer = TfidfVectorizer(sublinear_tf = True, norm = 'l2', ngram_range = (1,2), stop_words = stopwords('ny'))
@@ -64,7 +63,7 @@ for label_id, label in sorted(encoded_labels.items()):
     print("\t. Most correlated bigrams:\n\t\t. {}".format('\n\t\t. '.join(bigrams[-K:])))
 '''
 
-K = 35000
+K = 40000
 kbest = SelectKBest(chi2, k = K)
 train_features_best = kbest.fit_transform(train_features, train_data['Label_Id'])
 test_features_best = kbest.transform(test_features)
