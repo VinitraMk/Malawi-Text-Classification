@@ -1,0 +1,75 @@
+/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py:683: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 674, in _score
+    scores = scorer(estimator, X_test, y_test)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 199, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true,
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 277, in _score
+    y_pred = method_caller(clf, "predict_proba", X)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 53, in _cached_call
+    return getattr(estimator, method)(*args, **kwargs)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 114, in __get__
+    getattr(delegate, self.attribute_name)
+AttributeError: 'LinearSVC' object has no attribute 'predict_proba'
+
+  warnings.warn(
+/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py:683: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 674, in _score
+    scores = scorer(estimator, X_test, y_test)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 199, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true,
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 277, in _score
+    y_pred = method_caller(clf, "predict_proba", X)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 53, in _cached_call
+    return getattr(estimator, method)(*args, **kwargs)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 114, in __get__
+    getattr(delegate, self.attribute_name)
+AttributeError: 'LinearSVC' object has no attribute 'predict_proba'
+
+  warnings.warn(
+/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py:683: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 674, in _score
+    scores = scorer(estimator, X_test, y_test)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 199, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true,
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 277, in _score
+    y_pred = method_caller(clf, "predict_proba", X)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 53, in _cached_call
+    return getattr(estimator, method)(*args, **kwargs)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 114, in __get__
+    getattr(delegate, self.attribute_name)
+AttributeError: 'LinearSVC' object has no attribute 'predict_proba'
+
+  warnings.warn(
+/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py:683: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 674, in _score
+    scores = scorer(estimator, X_test, y_test)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 199, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true,
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 277, in _score
+    y_pred = method_caller(clf, "predict_proba", X)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 53, in _cached_call
+    return getattr(estimator, method)(*args, **kwargs)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 114, in __get__
+    getattr(delegate, self.attribute_name)
+AttributeError: 'LinearSVC' object has no attribute 'predict_proba'
+
+  warnings.warn(
+/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py:683: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 674, in _score
+    scores = scorer(estimator, X_test, y_test)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 199, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true,
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 277, in _score
+    y_pred = method_caller(clf, "predict_proba", X)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/metrics/_scorer.py", line 53, in _cached_call
+    return getattr(estimator, method)(*args, **kwargs)
+  File "/home/azureuser/env/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 114, in __get__
+    getattr(delegate, self.attribute_name)
+AttributeError: 'LinearSVC' object has no attribute 'predict_proba'
+
+  warnings.warn(

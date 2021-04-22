@@ -1,0 +1,8 @@
+
+Transformed features shape:  (1436, 288828)
+
+Reduced chi2 features:  (1436, 40000) (620, 40000)
+Training XGBoost Classifier...
+
+Final paramgrid: {'clf__n_estimators': [85], 'clf__subsample': [0.8]} 
+

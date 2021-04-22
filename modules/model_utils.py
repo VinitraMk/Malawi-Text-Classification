@@ -13,7 +13,7 @@ def get_gdsearch(text_clf, model_type = 'Gaussian'):
         parameters['clf__alpha'] = (1e-1, 1e-2, 1e-3)
 
     if model_type == 'XGBoost':
-        parameters['clf__n_estimators'] = [75]
+        parameters['clf__n_estimators'] = [85]
         #parameters['clf__max_depth'] = [35]
         parameters['clf__subsample'] = [0.8]
     
@@ -21,6 +21,9 @@ def get_gdsearch(text_clf, model_type = 'Gaussian'):
         parameters['clf__break_ties'] = (True, False)
         parameters['clf__class_weight'] = ['balanced']
         parameters['clf__degree'] = [3, 4]
+
+    if model_type == 'LSVM':
+        parameters['clf__C'] = [1]
 
     print('Final paramgrid:', parameters,'\n')
     gs_clf = GridSearchCV(text_clf, parameters, cv = 5, n_jobs = -1, scoring='roc_auc_ovr')

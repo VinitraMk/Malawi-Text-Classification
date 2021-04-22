@@ -1,0 +1,17 @@
+
+Transformed features shape:  (1436, 288828)
+
+Reduced chi2 features:  (1436, 40000) (620, 40000)
+Training Linear SVM Model...
+
+Final paramgrid: {} 
+
+Best estimator params:  {}
+All model params:  {'cv': 5, 'error_score': nan, 'estimator__memory': None, 'estimator__steps': [('clf', LinearSVC(C=1, class_weight='balanced', max_iter=1000000))], 'estimator__verbose': False, 'estimator__clf': LinearSVC(C=1, class_weight='balanced', max_iter=1000000), 'estimator__clf__C': 1, 'estimator__clf__class_weight': 'balanced', 'estimator__clf__dual': True, 'estimator__clf__fit_intercept': True, 'estimator__clf__intercept_scaling': 1, 'estimator__clf__loss': 'squared_hinge', 'estimator__clf__max_iter': 1000000, 'estimator__clf__multi_class': 'ovr', 'estimator__clf__penalty': 'l2', 'estimator__clf__random_state': None, 'estimator__clf__tol': 0.0001, 'estimator__clf__verbose': 0, 'estimator': Pipeline(steps=[('clf',
+                 LinearSVC(C=1, class_weight='balanced', max_iter=1000000))]), 'n_jobs': -1, 'param_grid': {}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': 'roc_auc_ovr', 'verbose': 0} 
+
+Saving predictions to csv...
+
+
+Minutes elapsed: 0.8045695662498474 
+

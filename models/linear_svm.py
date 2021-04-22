@@ -20,8 +20,9 @@ class LinearSVM:
 
     def train_models(self):
         pipeline = get_pipeline(LinearSVC(C=1, multi_class='ovr',class_weight='balanced', max_iter = 1000000, dual = True), 'tfidf')
-        self.model = get_gdsearch(pipeline).fit(self.X, self.y)
+        self.model = get_gdsearch(pipeline, 'LSVM').fit(self.X, self.y)
         print('Best estimator params: ', self.model.best_params_)
+        print('All model params: ', self.model.get_params(True),'\n')
 
     def predict_and_save_csv(self, test_features):
         print('Training Linear SVM Model...\n')

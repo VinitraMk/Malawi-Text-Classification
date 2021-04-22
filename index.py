@@ -63,13 +63,16 @@ for label_id, label in sorted(encoded_labels.items()):
     print("\t. Most correlated bigrams:\n\t\t. {}".format('\n\t\t. '.join(bigrams[-K:])))
 '''
 
-K = 40000
+K = 50000
 kbest = SelectKBest(chi2, k = K)
 train_features_best = kbest.fit_transform(train_features, train_data['Label_Id'])
 test_features_best = kbest.transform(test_features)
 print('\nReduced chi2 features: ', train_features_best.shape, test_features_best.shape)
 
-xgb = XGBoost(train_features_best, train_data['Label_Id'], test_data['ID'], le)
-xgb.predict_and_save_csv(test_features_best)
+#xgb = XGBoost(train_features_best, train_data['Label_Id'], test_data['ID'], le)
+#xgb.predict_and_save_csv(test_features_best)
+
+linear_model = LinearSVM(train_features_best, train_data['Label_Id'], test_data['ID'], le)
+linear_model.predict_and_save_csv(test_features_best)
 et = time.time()
 print('\nMinutes elapsed:',(et - st) * 60 / 3600,'\n')
