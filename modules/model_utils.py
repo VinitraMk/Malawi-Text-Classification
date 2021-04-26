@@ -26,7 +26,7 @@ def get_gdsearch(text_clf, model_type = 'Gaussian'):
         parameters['clf__C'] = [1]
 
     if model_type == 'RandomForest':
-        parameters['clf__n_estimators'] = [60]
+        parameters['clf__n_estimators'] = [50]
 
     print('Final paramgrid:', parameters,'\n')
     gs_clf = GridSearchCV(text_clf, parameters, cv = 5, n_jobs = -1, scoring='roc_auc_ovr')

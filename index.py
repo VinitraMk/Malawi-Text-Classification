@@ -48,9 +48,8 @@ train_features = vectorizer.fit_transform(train_texts).toarray()
 test_features = vectorizer.transform(test_texts).toarray()
 print('Transformed features shape: ',train_features.shape)
 label_ids = train_data['Label_Id']
-print(vectorizer.vocabulary_)
-'''
-K = 8000
+
+K = 10000
 kbest = SelectKBest(chi2, k = K)
 train_features_best = kbest.fit_transform(train_features, train_data['Label_Id'])
 test_features_best = kbest.transform(test_features)
@@ -64,4 +63,3 @@ random_forest.predict_and_save_csv(test_features_best)
 
 et = time.time()
 print('\nMinutes elapsed:',(et - st) * 60 / 3600,'\n')
-'''
