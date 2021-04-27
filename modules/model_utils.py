@@ -3,7 +3,7 @@ from sklearn.pipeline import Pipeline
 from modules.vectorizer import get_extractors
 from sklearn.feature_selection import chi2, SelectKBest
 
-def get_gdsearch(text_clf, model_type = 'Gaussian'):
+def get_gdsearch(text_clf, model_type = 'Gaussian', skip_vectorizer = False):
     parameters = {
         #'vect__ngram_range': [(1,1), (1,2), (1,4)],
         #'tfidf__use_idf': (True, False)
@@ -30,6 +30,12 @@ def get_gdsearch(text_clf, model_type = 'Gaussian'):
 
     if model_type == 'RandomForest':
         parameters['clf__n_estimators'] = [50]
+
+    if model_type == 'Logistic':
+        parameters['clf__max_iter'] = [10]
+        if not(skip_vectorizer):
+            parameters['vect__ngram_range'] = [(1,2)]
+            parameters['tfidf__use_idf'] = [False]
 
     print('Final paramgrid:', parameters,'\n')
     gs_clf = GridSearchCV(text_clf, parameters, cv = 5, n_jobs = -1, scoring='roc_auc_ovr')
