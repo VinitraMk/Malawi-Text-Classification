@@ -1,5 +1,7 @@
 import re
 from sklearn.preprocessing import LabelEncoder
+from config.config import Config
+import os
 
 def clean_text(text):
     text = re.sub(r'<.*?>','',text)
@@ -14,6 +16,27 @@ def clean_text(text):
     translate_map = str.maketrans(translate_dict)
     text = text.translate(translate_map)
     return text
+
+def build_vocabulary():
+    input_file_path = os.path.join(Config().get_config()['input_directory'],'all.txt')
+    fp = open(input_file_path)
+    lines = fp.readlines()
+    vocabulary = {}
+    words = []
+    c = 0
+    
+    for i in range(len(lines)):
+        line = re.sub(r"<\n>",'', lines[i])
+        line = line.strip().lower()
+        if line not in vocabulary:
+            vocabulary[line] = c
+            words.append(line)
+            c = c + 1
+
+    print(f'Built vocabulary of size {len(words)}\n')
+
+    return words
+
 
 class LabelEncoding:
 

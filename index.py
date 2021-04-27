@@ -1,4 +1,4 @@
-from modules.preprocessing import clean_text, LabelEncoding
+from modules.preprocessing import clean_text, LabelEncoding, build_vocabulary
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.feature_selection import chi2, SelectKBest
 import pandas as pd
@@ -42,27 +42,48 @@ plt.ylabel('No of occurences')
 plt.xlabel('Category')
 #plt.show()
 print()
+#vocabulary = build_vocabulary()
 
-'''
 vectorizer = TfidfVectorizer(sublinear_tf = True, norm = 'l2', ngram_range = (1,2), stop_words = stopwords('ny'))
 train_features = vectorizer.fit_transform(train_texts).toarray()
-test_features = vectorizer.transform(test_texts).toarray()
+#test_features = vectorizer.transform(test_texts).toarray()
+reduced_vocabulary = []
+
 print('Transformed features shape: ',train_features.shape)
 label_ids = train_data['Label_Id']
 
-K = 750
+K = 700
+for label_id, label in sorted(encoded_labels.items()):
+    train_features_chi2 = chi2(train_features, label_ids == label_id)
+    indices = np.argsort(train_features_chi2[0])
+    feature_names = np.array(vectorizer.get_feature_names())[indices]
+
+    unigrams = [v for v in feature_names if len(v.split(' ')) == 1]
+    bigrams = [v for v in feature_names if len(v.split(' ')) == 2]
+
+    #print("# '{}':".format(label))
+    #print("\t. Most correlated unigrams:\n\t\t. {}".format('\n\t\t. '.join(unigrams[-K:])))
+    #print("\t. Most correlated bigrams:\n\t\t. {}".format('\n\t\t. '.join(bigrams[-K:])))
+    reduced_vocabulary = reduced_vocabulary + unigrams[-K:] + bigrams[-K:]
+
+reduced_vocabulary = list(set(reduced_vocabulary))
+vectorizer = TfidfVectorizer(sublinear_tf = True, norm = 'l2', ngram_range = (1,2), stop_words = stopwords('ny'),
+        vocabulary = reduced_vocabulary)
+
+train_features_best = vectorizer.fit_transform(train_texts).toarray()
+test_features_best = vectorizer.transform(test_texts).toarray()
+print('\nReduced vocabulary features: ', train_features_best.shape, test_features_best.shape)
+
+'''
+K = 5000
 kbest = SelectKBest(chi2, k = K)
 train_features_best = kbest.fit_transform(train_features, train_data['Label_Id'])
 test_features_best = kbest.transform(test_features)
 print('\nReduced chi2 features: ', train_features_best.shape, test_features_best.shape)
-
-#linear_model = LinearSVM(train_features_best, train_data['Label_Id'], test_data['ID'], le)
-#linear_model.predict_and_save_csv(test_features_best)
-
 '''
 
-logistic_model = Logistic(train_texts, train_data['Label_Id'], test_data['ID'], le)
-logistic_model.predict_and_save_csv(test_texts)
+linear_model = LinearSVM(train_features_best, train_data['Label_Id'], test_data['ID'], le)
+linear_model.predict_and_save_csv(test_features_best)
 
 et = time.time()
 print('\nMinutes elapsed:',(et - st) * 60 / 3600,'\n')
