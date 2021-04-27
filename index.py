@@ -52,7 +52,7 @@ reduced_vocabulary = []
 print('Transformed features shape: ',train_features.shape)
 label_ids = train_data['Label_Id']
 
-K = 700
+K = 1000
 for label_id, label in sorted(encoded_labels.items()):
     train_features_chi2 = chi2(train_features, label_ids == label_id)
     indices = np.argsort(train_features_chi2[0])
