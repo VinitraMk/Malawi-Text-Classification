@@ -11,20 +11,23 @@ class NaiveBayesian:
     model = None
     test_ids = None
     test_features = None
+    label_encoder = None
 
-    def __init__(self, X, y, test_ids):
+    def __init__(self, X, y, test_ids, label_encoder):
         self.X = X
         self.y = y
         self.test_ids = test_ids
+        self.label_encoder = label_encoder
 
-    def train_model(self, type = 'Gaussian'):
+    def train_model(self, model_type = 'Gaussian'):
         if type == 'Gaussian':
             vectorizer = Vectorizer(self.X, self.y)
             train_features, test_features = vectorizer.get_vectorized_features(type='count')
             self.test_features = test_features
             self.model = GaussianNB().fit(train_features.toarray(), self.y)
         else:
-            self.model = get_gdsearch(get_pipeline(MultinomialNB()), type).fit(self.X, self.y)
+            self.model = get_gdsearch(get_pipeline(MultinomialNB(), True), model_type).fit(self.X, self.y)
+            print('Best parameters selected', self.model.best_params_,'\n')
 
 
     def predict_and_save_csv(self, test_features, model_type = 'Gaussian'):
@@ -39,7 +42,8 @@ class NaiveBayesian:
         else:
             y_preds = self.model.predict(test_features)
         y_ids = pd.DataFrame(self.test_ids, columns=['ID'])
-        y_preds_df = pd.DataFrame(y_preds, columns=['Label'])
+        y_preds_df = pd.DataFrame(y_preds, columns=['Label_Id'])
         predictions = y_ids.join(y_preds_df)
+        predictions = self.label_encoder.decode(predictions)
         predictions.to_csv(f'{output_directory}/{title}.csv', index=False)
 

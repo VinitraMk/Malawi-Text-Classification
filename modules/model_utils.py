@@ -10,7 +10,10 @@ def get_gdsearch(text_clf, model_type = 'Gaussian'):
     }
 
     if model_type == 'Multinom':
-        parameters['clf__alpha'] = (1e-1, 1e-2, 1e-3)
+        parameters['clf__alpha'] = [1e-3]
+        parameters['vect__ngram_range'] = [(1,4)]
+        parameters['vect__max_features'] = [250]
+        parameters['tfidf__use_idf'] = [True]
 
     if model_type == 'XGBoost':
         parameters['clf__n_estimators'] = [85]
@@ -33,11 +36,18 @@ def get_gdsearch(text_clf, model_type = 'Gaussian'):
 
     return gs_clf
 
-def get_pipeline(clf, extractor_type = 'count'):
-    text_clf = Pipeline([
-        #('tfidf', get_extractors('tfidf-transformer')),
-        ('clf', clf)
-    ])
+def get_pipeline(clf, extractor_type = 'count', use_vectorizer = False):
+    if not(use_vectorizer):
+        text_clf = Pipeline([
+            ('clf', clf)
+        ])
+    else:
+        text_clf = Pipeline([
+            ('vect', get_extractors('count')),
+            ('tfidf', get_extractors('tfidf-transformer')),
+            ('clf', clf)
+        ])
+
     return text_clf
 
 def select_kbest(k):
