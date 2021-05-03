@@ -48,10 +48,11 @@ vectorizer = TfidfVectorizer(sublinear_tf = True, norm = 'l2', ngram_range = (1,
 train_features = vectorizer.fit_transform(train_texts).toarray()
 #test_features = vectorizer.transform(test_texts).toarray()
 reduced_vocabulary = []
+print(len(vectorizer.vocabulary_))
 print('Transformed features shape: ',train_features.shape)
 label_ids = train_data['Label_Id']
 
-K = 900
+K = 1000
 for label_id, label in sorted(encoded_labels.items()):
     train_features_chi2 = chi2(train_features, label_ids == label_id)
     indices = np.argsort(train_features_chi2[0])
@@ -61,8 +62,8 @@ for label_id, label in sorted(encoded_labels.items()):
     bigrams = [v for v in feature_names if len(v.split(' ')) == 2]
 
     #print("# '{}':".format(label))
-    #print("\t. Most correlated unigrams:\n\t\t. {}".format('\n\t\t. '.join(bigrams[-K:])))
-    #print("\t. Most correlated bigrams:\n\t\t. {}".format('\n\t\t. '.join(trigrams[-K:])))
+    #print("\t. Most correlated unigrams:\n\t\t. {}".format('\n\t\t. '.join(unigrams[-K:])))
+    #print("\t. Most correlated bigrams:\n\t\t. {}".format('\n\t\t. '.join(bigrams[-K:])))
     reduced_vocabulary = reduced_vocabulary + unigrams[-K:] + bigrams[-K:]
 
 reduced_vocabulary = list(set(reduced_vocabulary))
@@ -73,7 +74,16 @@ train_features_best = vectorizer.fit_transform(train_texts).toarray()
 test_features_best = vectorizer.transform(test_texts).toarray()
 print('\nReduced vocabulary features: ', train_features_best.shape, test_features_best.shape)
 
+'''
+K = 5000
+kbest = SelectKBest(chi2, k = K)
+train_features_best = kbest.fit_transform(train_features, train_data['Label_Id'])
+test_features_best = kbest.transform(test_features)
+print('\nReduced chi2 features: ', train_features_best.shape, test_features_best.shape)
+'''
+
 linear_model = LinearSVM(train_features_best, train_data['Label_Id'], test_data['ID'], le)
 linear_model.predict_and_save_csv(test_features_best)
+
 et = time.time()
 print('\nMinutes elapsed:',(et - st) * 60 / 3600,'\n')

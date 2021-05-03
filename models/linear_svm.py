@@ -19,7 +19,7 @@ class LinearSVM:
         self.label_encoder = label_encoder
 
     def train_models(self):
-        pipeline = get_pipeline(LinearSVC(C=1, multi_class='ovr',class_weight='balanced', max_iter = 1000000, dual = True), 'tfidf')
+        pipeline = get_pipeline(LinearSVC(C=1, multi_class='ovr',class_weight='balanced', max_iter = 1000000, dual = True, tol=1e-5), 'tfidf')
         self.model = get_gdsearch(pipeline, 'LSVM').fit(self.X, self.y)
         print('Best estimator params: ', self.model.best_params_)
         print('All model params: ', self.model.get_params(True),'\n')
