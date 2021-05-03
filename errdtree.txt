@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "index.py", line 80, in <module>
+    #dtree.predict_and_save_csv(test_features_best)
+  File "/home/azureuser/Malawi-Text-Classification/models/decision_tree.py", line 26, in predict_and_save_csv
+    title = get_filename('decision_tree')
+NameError: name 'get_filename' is not defined

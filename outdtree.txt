@@ -1,0 +1,10 @@
+
+Transformed features shape:  (1436, 288828)
+
+Reduced vocabulary features:  (1436, 7950) (620, 7950)
+Training Decision Tree Model...
+
+Final paramgrid: {'clf__max_features': ['sqrt']} 
+
+Saving predictions to csv...
+
