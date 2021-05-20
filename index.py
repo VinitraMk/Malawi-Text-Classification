@@ -53,7 +53,7 @@ reduced_vocabulary = []
 print('Transformed features shape: ',train_features.shape)
 label_ids = train_data['Label_Id']
 
-K = 100 
+K = 600
 for label_id, label in sorted(encoded_labels.items()):
     train_features_chi2 = chi2(train_features, label_ids == label_id)
     indices = np.argsort(train_features_chi2[0])
@@ -84,6 +84,9 @@ else:
     elif sys.argv[1] == 'xgb':
         xgb = XGBoost(train_features_best, train_data['Label_Id'], test_data['ID'], le)
         xgb.predict_and_save_csv(test_features_best)
+    elif sys.argv[1] == 'rdf':
+        rdf = RandomForest(train_features_best, train_data['Label_Id'], test_data['ID'], le)
+        rdf.predict_and_save_csv(test_features_best)
 
 et = time.time()
 print('\nMinutes elapsed:',(et - st) * 60 / 3600,'\n')

@@ -1,8 +1,8 @@
 
 Transformed features shape:  (1436, 288828)
 
-Reduced vocabulary features:  (1436, 7950) (620, 7950)
+Reduced vocabulary features:  (1436, 19788) (620, 19788)
 Training XGBoost Classifier...
 
-Final paramgrid: {'clf__n_estimators': [30], 'clf__subsample': [0.5]} 
+Final paramgrid: {'clf__n_estimators': [75], 'clf__subsample': [0.5]} 
 

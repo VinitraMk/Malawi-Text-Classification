@@ -16,7 +16,7 @@ def get_gdsearch(text_clf, model_type = 'Gaussian', skip_vectorizer = False):
         parameters['tfidf__use_idf'] = [True]
 
     if model_type == 'XGBoost':
-        parameters['clf__n_estimators'] = [30]
+        parameters['clf__n_estimators'] = [75]
         parameters['clf__subsample'] = [0.5]
     
     if model_type == 'SVC':
@@ -28,7 +28,7 @@ def get_gdsearch(text_clf, model_type = 'Gaussian', skip_vectorizer = False):
         parameters['clf__C'] = [1]
 
     if model_type == 'RandomForest':
-        parameters['clf__n_estimators'] = [50]
+        parameters['clf__n_estimators'] = [65]
 
     if model_type == 'Logistic':
         parameters['clf__max_iter'] = [10]

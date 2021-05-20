@@ -31,8 +31,8 @@ class XGBoost:
     def predict_and_save_csv(self, test_features, skip_pipeline = False):
         print('Training XGBoost Classifier...\n')
         self.train_model(skip_pipeline)
-        print('Saving predictions to csv...\n')
         title = get_filename('xgboost')
+        print(f'Saving predictions to csv {title}...\n')
         output_directory = Config().get_config()['output_directory']
         y_preds = self.model.predict(test_features)
         y_ids = pd.DataFrame(self.test_ids, columns=['ID'])
